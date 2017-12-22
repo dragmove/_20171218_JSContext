@@ -38,7 +38,7 @@ class ViewController: UIViewController, WKUIDelegate ,WKNavigationDelegate, WKSc
         let configuration: WKWebViewConfiguration = WKWebViewConfiguration()
         configuration.userContentController = contentController
         
-        wkWebView = WKWebView(frame: self.view.bounds, configuration: configuration)
+        wkWebView = WKWebView(frame: self.view.frame, configuration: configuration)
         wkWebView!.uiDelegate = self
         wkWebView!.navigationDelegate = self
         
@@ -50,14 +50,25 @@ class ViewController: UIViewController, WKUIDelegate ,WKNavigationDelegate, WKSc
     }
     
     func setKeyboardInputAccessoryView() {
-        let frame = CGRect(x: 0, y: 0, width: self.view.bounds.width, height: 60)
+        // TODO: make dummy toolbar
+        let toolBarHeight: CGFloat = 60
         
-        let accessoryView = UIView(frame: frame)
-        accessoryView.backgroundColor = UIColor.red
-        accessoryView.alpha = 0.6
-        // accessoryView.translatesAutoresizingMaskIntoConstraints = false
+        let scrollViewFrame = CGRect(x: 0, y: 0, width: self.view.frame.width, height: toolBarHeight)
+        let scrollView: UIScrollView = UIScrollView(frame: scrollViewFrame)
         
-        wkWebView?.addRichEditorInputAccessoryView(accessoryView: accessoryView)
+        let optionItemNames: [String] = ["bold", "italic"]
+        let optionItemFrame: CGRect = CGRect(x: 0, y: 0, width: 60, height: 60)
+        
+        var optionItem: ToolBarOptionItem
+        for (index, _) in optionItemNames.enumerated() {
+            optionItem = ToolBarOptionItem(frame: optionItemFrame, image: UIImage(named: "btn-option-item"), title: optionItemNames[index], webView: wkWebView!)
+            optionItem.frame.origin.x = CGFloat(index) * optionItemFrame.width
+            scrollView.addSubview(optionItem)
+        }
+        
+        scrollView.contentSize = CGSize(width: optionItemFrame.width * CGFloat(optionItemNames.count), height: toolBarHeight)
+        
+        wkWebView?.addRichEditorInputAccessoryView(accessoryView: scrollView)
     }
     
     func setKeyboardObservers() {
