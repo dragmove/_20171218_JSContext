@@ -26,6 +26,12 @@ class ViewController: UIViewController, WKUIDelegate ,WKNavigationDelegate, WKSc
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        self.setWebView()
+        self.setKeyboardInputAccessoryView()
+        self.setKeyboardObservers()
+    }
+    
+    func setWebView() {
         let contentController: WKUserContentController = WKUserContentController()
         contentController.add(self, name: messageHandlerName)
         
@@ -36,12 +42,35 @@ class ViewController: UIViewController, WKUIDelegate ,WKNavigationDelegate, WKSc
         wkWebView!.uiDelegate = self
         wkWebView!.navigationDelegate = self
         
-        self.view = wkWebView
+        self.view.addSubview(wkWebView!)
         
-        // Do any additional setup after loading the view, typically from a nib.
         if let url = Bundle.main.url(forResource: "main", withExtension: "html") {
             wkWebView!.load(URLRequest(url: url))
         }
+    }
+    
+    func setKeyboardInputAccessoryView() {
+        let frame = CGRect(x: 0, y: 0, width: self.view.bounds.width, height: 60)
+        
+        let accessoryView = UIView(frame: frame)
+        accessoryView.backgroundColor = UIColor.red
+        accessoryView.alpha = 0.6
+        // accessoryView.translatesAutoresizingMaskIntoConstraints = false
+        
+        wkWebView?.addRichEditorInputAccessoryView(accessoryView: accessoryView)
+    }
+    
+    func setKeyboardObservers() {
+        NotificationCenter.default.addObserver(self, selector: #selector(self.keyboardWillShow(_:)), name: NSNotification.Name.UIKeyboardWillShow, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(self.keyboardWillHide(_:)), name: NSNotification.Name.UIKeyboardWillHide, object: nil)
+    }
+    
+    @objc func keyboardWillShow(_ sender: Notification) {
+        print("keyboardWillShow")
+    }
+    
+    @objc func keyboardWillHide(_ sender: Notification) {
+        print("keyboardWillHide")
     }
     
     @IBAction func btnClicked(_ sender: Any) {
