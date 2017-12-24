@@ -46,9 +46,7 @@ class ToolBarOptionItem: UIView, ToolBarOptionItemProtocol {
     }
     
     @objc private func tappedBtn(_ sender: AnyObject) {
-        // print("self.title : \(self.title)")
-        
-        self.webView.evaluateJavaScript("setEditorCommand()") { (result, error) in
+        self.webView.evaluateJavaScript("setEditorCommand(\"\(self.title)\")") { (result, error) in
             if result != nil {
                 print("result: \(result!)")
             } else {

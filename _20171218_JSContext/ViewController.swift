@@ -56,13 +56,14 @@ class ViewController: UIViewController, WKUIDelegate ,WKNavigationDelegate, WKSc
         let scrollViewFrame = CGRect(x: 0, y: 0, width: self.view.frame.width, height: toolBarHeight)
         let scrollView: UIScrollView = UIScrollView(frame: scrollViewFrame)
         
-        let optionItemNames: [String] = ["bold", "italic"]
+        let optionItemNames: [String] = ["bold", "italic", "underline", "strike", "undo", "redo"]
         let optionItemFrame: CGRect = CGRect(x: 0, y: 0, width: 60, height: 60)
         
         var optionItem: ToolBarOptionItem
         for (index, _) in optionItemNames.enumerated() {
             optionItem = ToolBarOptionItem(frame: optionItemFrame, image: UIImage(named: "btn-option-item"), title: optionItemNames[index], webView: wkWebView!)
             optionItem.frame.origin.x = CGFloat(index) * optionItemFrame.width
+            
             scrollView.addSubview(optionItem)
         }
         
