@@ -29,6 +29,8 @@ class ViewController: UIViewController, WKUIDelegate ,WKNavigationDelegate, WKSc
         self.setWebView()
         self.setKeyboardInputAccessoryView()
         self.setKeyboardObservers()
+        
+        self.setPreviewBtn()
     }
     
     func setWebView() {
@@ -74,6 +76,7 @@ class ViewController: UIViewController, WKUIDelegate ,WKNavigationDelegate, WKSc
     
     func setKeyboardObservers() {
         NotificationCenter.default.addObserver(self, selector: #selector(self.keyboardWillShow(_:)), name: NSNotification.Name.UIKeyboardWillShow, object: nil)
+        
         NotificationCenter.default.addObserver(self, selector: #selector(self.keyboardWillHide(_:)), name: NSNotification.Name.UIKeyboardWillHide, object: nil)
     }
     
@@ -85,6 +88,23 @@ class ViewController: UIViewController, WKUIDelegate ,WKNavigationDelegate, WKSc
         print("keyboardWillHide")
     }
     
+    func setPreviewBtn() {
+        let btnFrame = CGRect(x: 0, y: 200, width: 100, height: 50)
+        
+        let previewBtn = UIButton(frame: btnFrame)
+        previewBtn.setTitle("preview", for: UIControlState.normal)
+        previewBtn.setTitleColor(UIColor.red, for: UIControlState.normal)
+        
+        self.view.addSubview(previewBtn)
+        
+        previewBtn.addTarget(self, action: #selector(self.tappedPreviewBtn(_:)), for: UIControlEvents.touchUpInside)
+    }
+    
+    @objc func tappedPreviewBtn(_ sender: AnyObject) {
+        print("oh ho")
+    }
+    
+    /*
     @IBAction func btnClicked(_ sender: Any) {
         wkWebView!.evaluateJavaScript("window.getMsg()") { (result, error) in
             if result != nil {
@@ -100,6 +120,7 @@ class ViewController: UIViewController, WKUIDelegate ,WKNavigationDelegate, WKSc
             }
         }
     }
+    */
     
     // require func for display javascript alert
     func webView(_ webView: WKWebView, runJavaScriptAlertPanelWithMessage message: String, initiatedByFrame frame: WKFrameInfo, completionHandler: @escaping () -> Void) {
