@@ -11,6 +11,8 @@ import WebKit
 
 class ViewController: UIViewController, WKUIDelegate ,WKNavigationDelegate, WKScriptMessageHandler {
     // const
+    let const = CONST()
+    
     let messageHandlerName = "callbackHandler"
     
     // variables
@@ -101,7 +103,9 @@ class ViewController: UIViewController, WKUIDelegate ,WKNavigationDelegate, WKSc
     }
     
     @objc func tappedPreviewBtn(_ sender: AnyObject) {
-        print("oh ho")
+        print("preview")
+        self.startCaptureWebView(wkWebView: wkWebView!)
+        
     }
     
     /*
@@ -131,6 +135,112 @@ class ViewController: UIViewController, WKUIDelegate ,WKNavigationDelegate, WKSc
         }))
         
         self.present(alertController, animated: true, completion: nil)
+    }
+    
+    
+    
+    
+    
+    var wkWebViewFrame: CGRect = CGRect(x: 0, y: 0, width: 0, height: 0)
+    var count: UInt = 0
+    
+    
+    func startCaptureWebView(wkWebView: WKWebView) {
+        self.wkWebViewFrame = wkWebView.frame
+        
+        
+        // save current content offset
+        
+        let webViewScrollContentOffset: CGPoint = wkWebView.scrollView.contentOffset
+        print("webViewScrollContentOffset : \(webViewScrollContentOffset)")
+        
+        let contentSize: CGSize = wkWebView.scrollView.contentSize
+        print("contentSize : \(contentSize)")
+        
+        // TODO: test instagram image size
+        let heightByRatio: CGFloat = (const.SIZE_INSTAGRAM.height / const.SIZE_INSTAGRAM.width) * contentSize.width
+        let size: CGSize = CGSize(width: contentSize.width, height: heightByRatio)
+        print("size : \(size)")
+        
+        let imageNumToCapture: UInt = UInt((contentSize.height / size.height).rounded(FloatingPointRoundingRule.up))
+        print("imageNumToCapture : \(imageNumToCapture)")
+        
+        // before capture, scroll to top.
+        wkWebView.scrollView.contentOffset = CGPoint(x: 0.0, y: 0.0)
+        
+        self.captureWebView(wkWebView: wkWebView, contentSizeToCapture: size, imageNumToCapture: imageNumToCapture)
+    }
+    
+    func captureWebView(wkWebView:WKWebView, contentSizeToCapture: CGSize, imageNumToCapture: UInt) {
+        print("captureWebView")
+        
+        wkWebView.frame = CGRect(x: self.wkWebViewFrame.origin.x, y: self.wkWebViewFrame.origin.y, width: contentSizeToCapture.width, height: contentSizeToCapture.height)
+        print("wkWebView.frame : \(wkWebView.frame)")
+        
+        self.count = 0
+        self.repeatCaptureWebView(wkWebView: wkWebView, contentSizeToCapture: contentSizeToCapture, count: self.count, imageNumToCapture: imageNumToCapture)
+        
+        /*
+        if self.timer != nil { timer!.invalidate() }
+        self.timer = Timer.scheduledTimer(timeInterval: 5, target: BlockOperation(block: {
+            wkWebView.scrollView.contentOffset = CGPoint(x: 0, y: 0 + (CGFloat(self.count) * contentSizeToCapture.height))
+            print("wkWebView.scrollView.contentOffset : \(wkWebView.scrollView.contentOffset)")
+            
+            UIGraphicsBeginImageContextWithOptions(contentSizeToCapture, true , UIScreen.main.scale)
+            wkWebView.layer.render(in: UIGraphicsGetCurrentContext()!)
+            
+            let screenshot: UIImage? = UIGraphicsGetImageFromCurrentImageContext()
+            UIGraphicsEndImageContext()
+            UIImageWriteToSavedPhotosAlbum(screenshot!, nil, nil, nil)
+            
+            self.count += 1
+            
+            if self.count >= imageNumToCapture {
+                self.timer!.invalidate()
+                
+                self.count = 0
+                
+                wkWebView.frame = frame
+                
+                wkWebView.scrollView.contentOffset = CGPoint(x: 0.0, y: 0.0)
+                
+                self.endCaptureWebView()
+            }
+            
+        }), selector: #selector(Operation.main), userInfo: nil, repeats: true)
+        */
+    }
+    
+    func repeatCaptureWebView(wkWebView: WKWebView, contentSizeToCapture: CGSize, count: UInt, imageNumToCapture: UInt) {
+        wkWebView.scrollView.contentOffset = CGPoint(x: 0, y: 0 + (CGFloat(count) * contentSizeToCapture.height))
+        print("wkWebView.scrollView.contentOffset : \(wkWebView.scrollView.contentOffset)")
+        
+        UIGraphicsBeginImageContextWithOptions(contentSizeToCapture, true , UIScreen.main.scale)
+        wkWebView.layer.render(in: UIGraphicsGetCurrentContext()!)
+        
+        let screenshot: UIImage? = UIGraphicsGetImageFromCurrentImageContext()
+        UIGraphicsEndImageContext()
+        UIImageWriteToSavedPhotosAlbum(screenshot!, nil, nil, nil)
+        
+        self.count = count + 1
+        print("self.count : \(self.count)")
+        
+        if self.count >= imageNumToCapture {
+            self.endCaptureWebView(wkWebView: wkWebView)
+            
+        } else {
+            self.repeatCaptureWebView(wkWebView: wkWebView, contentSizeToCapture: contentSizeToCapture, count: self.count, imageNumToCapture: imageNumToCapture)
+        }
+    }
+    
+    func endCaptureWebView(wkWebView: WKWebView) {
+        print("end")
+        
+        self.count = 0
+        
+        wkWebView.frame = self.wkWebViewFrame
+        
+        wkWebView.scrollView.contentOffset = CGPoint(x: 0.0, y: 0.0)
     }
     
     override func didReceiveMemoryWarning() {
