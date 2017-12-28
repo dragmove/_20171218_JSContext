@@ -19,6 +19,7 @@ class ViewController: UIViewController, WKUIDelegate ,WKNavigationDelegate, WKSc
     
     // variables
     var wkWebView: WKWebView?
+    var capturedImages:[UIImage] = [UIImage]()
     
     // WKScriptMessageHandler protocol
     func userContentController(_ userContentController: WKUserContentController, didReceive message: WKScriptMessage) {
@@ -32,11 +33,8 @@ class ViewController: UIViewController, WKUIDelegate ,WKNavigationDelegate, WKSc
         
         self.setWebView()
         self.setPreviewBtn()
-        
-        /*
-        self.setKeyboardInputAccessoryView()
-        self.setKeyboardObservers()
-        */
+        // self.setKeyboardInputAccessoryView()
+        // self.setKeyboardObservers()
     }
     
     func setWebView() {
@@ -180,7 +178,12 @@ class ViewController: UIViewController, WKUIDelegate ,WKNavigationDelegate, WKSc
         
         let screenshot: UIImage? = UIGraphicsGetImageFromCurrentImageContext()
         UIGraphicsEndImageContext()
-        UIImageWriteToSavedPhotosAlbum(screenshot!, nil, nil, nil)
+        
+        // TODO: make preview swipe UI
+        // UIImageWriteToSavedPhotosAlbum(screenshot!, nil, nil, nil)
+        self.capturedImages.append(screenshot!)
+        
+        print("self.capturedImages : \(self.capturedImages)")
         
         self.captureCount = count + 1
         print("captureCount : \(self.captureCount)")
@@ -204,7 +207,6 @@ class ViewController: UIViewController, WKUIDelegate ,WKNavigationDelegate, WKSc
         self.captureCount = 0
     }
     
-    
     // require func for display javascript alert
     func webView(_ webView: WKWebView, runJavaScriptAlertPanelWithMessage message: String, initiatedByFrame frame: WKFrameInfo, completionHandler: @escaping () -> Void) {
         let alertController = UIAlertController(title: message, message: nil, preferredStyle: UIAlertControllerStyle.alert)
@@ -214,6 +216,15 @@ class ViewController: UIViewController, WKUIDelegate ,WKNavigationDelegate, WKSc
         }))
         
         self.present(alertController, animated: true, completion: nil)
+    }
+    
+    // before segue, set ConfirmViewController datas
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier! == "segueFromRight" {
+            let destination = segue.destination as! ConfirmViewController
+            destination.capturedImages = self.capturedImages
+            destination.sender = self
+        }
     }
     
     override func didReceiveMemoryWarning() {
@@ -239,4 +250,8 @@ class ViewController: UIViewController, WKUIDelegate ,WKNavigationDelegate, WKSc
      }
      }
      */
+    
+    @IBAction func returnFromSegueActions(segue:UIStoryboardSegue){
+        
+    }
 }

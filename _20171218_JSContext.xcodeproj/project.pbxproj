@@ -13,6 +13,8 @@
 		9B4528861FF01DF500F3E97F /* app.js in Resources */ = {isa = PBXBuildFile; fileRef = 9B4528831FF01DF500F3E97F /* app.js */; };
 		9B4528881FF2890B00F3E97F /* Utils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B4528871FF2890B00F3E97F /* Utils.swift */; };
 		9B45288A1FF290E900F3E97F /* Config.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B4528891FF290E900F3E97F /* Config.swift */; };
+		9B6751FC1FF49F13004C0D38 /* ConfirmViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B6751FB1FF49F12004C0D38 /* ConfirmViewController.swift */; };
+		9B6751FE1FF4A288004C0D38 /* CustomSegueClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B6751FD1FF4A288004C0D38 /* CustomSegueClass.swift */; };
 		9BD99E421FE6CF0E00691A93 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9BD99E411FE6CF0E00691A93 /* AppDelegate.swift */; };
 		9BD99E441FE6CF0E00691A93 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9BD99E431FE6CF0E00691A93 /* ViewController.swift */; };
 		9BD99E471FE6CF0E00691A93 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 9BD99E451FE6CF0E00691A93 /* Main.storyboard */; };
@@ -33,6 +35,8 @@
 		9B4528831FF01DF500F3E97F /* app.js */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.javascript; name = app.js; path = ../../../../javascript/_20171213_EDITOR/build/app.js; sourceTree = "<group>"; };
 		9B4528871FF2890B00F3E97F /* Utils.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Utils.swift; sourceTree = "<group>"; };
 		9B4528891FF290E900F3E97F /* Config.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Config.swift; sourceTree = "<group>"; };
+		9B6751FB1FF49F12004C0D38 /* ConfirmViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConfirmViewController.swift; sourceTree = "<group>"; };
+		9B6751FD1FF4A288004C0D38 /* CustomSegueClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomSegueClass.swift; sourceTree = "<group>"; };
 		9BD99E3E1FE6CF0E00691A93 /* _20171218_JSContext.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = _20171218_JSContext.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		9BD99E411FE6CF0E00691A93 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		9BD99E431FE6CF0E00691A93 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -81,12 +85,14 @@
 				9B4528891FF290E900F3E97F /* Config.swift */,
 				9BD99E411FE6CF0E00691A93 /* AppDelegate.swift */,
 				9BF4131E1FECAB0500BE7B4D /* WKWebViewExtension.swift */,
-				9BF413201FECCDF300BE7B4D /* ToolBarOptionItem.swift */,
 				9BD99E431FE6CF0E00691A93 /* ViewController.swift */,
+				9BF413201FECCDF300BE7B4D /* ToolBarOptionItem.swift */,
 				9B4528871FF2890B00F3E97F /* Utils.swift */,
 				9BD99E451FE6CF0E00691A93 /* Main.storyboard */,
 				9BD99E4A1FE6CF0E00691A93 /* LaunchScreen.storyboard */,
 				9BD99E4D1FE6CF0E00691A93 /* Info.plist */,
+				9B6751FB1FF49F12004C0D38 /* ConfirmViewController.swift */,
+				9B6751FD1FF4A288004C0D38 /* CustomSegueClass.swift */,
 			);
 			path = _20171218_JSContext;
 			sourceTree = "<group>";
@@ -193,8 +199,10 @@
 				9B4528881FF2890B00F3E97F /* Utils.swift in Sources */,
 				9BD99E441FE6CF0E00691A93 /* ViewController.swift in Sources */,
 				9BF413211FECCDF300BE7B4D /* ToolBarOptionItem.swift in Sources */,
+				9B6751FE1FF4A288004C0D38 /* CustomSegueClass.swift in Sources */,
 				9BD99E421FE6CF0E00691A93 /* AppDelegate.swift in Sources */,
 				9BF4131F1FECAB0500BE7B4D /* WKWebViewExtension.swift in Sources */,
+				9B6751FC1FF49F13004C0D38 /* ConfirmViewController.swift in Sources */,
 				9B45288A1FF290E900F3E97F /* Config.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

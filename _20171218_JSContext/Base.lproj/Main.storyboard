@@ -19,16 +19,37 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="CwX-4S-vfG">
-                                <rect key="frame" x="0.0" y="20" width="375" height="647"/>
+                                <rect key="frame" x="0.0" y="20" width="375" height="597"/>
                                 <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            </view>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="nAr-d6-js5" userLabel="Bottom View">
+                                <rect key="frame" x="0.0" y="617" width="375" height="50"/>
+                                <subviews>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="jmf-pK-bCv">
+                                        <rect key="frame" x="8" y="10" width="53" height="30"/>
+                                        <state key="normal" title="capture"/>
+                                        <connections>
+                                            <segue destination="USt-HQ-rbM" kind="custom" identifier="segueFromRight" customClass="SegueFromRight" customModule="_20171218_JSContext" customModuleProvider="target" id="UxD-jq-saI"/>
+                                        </connections>
+                                    </button>
+                                </subviews>
+                                <color key="backgroundColor" red="0.51764705882352935" green="0.50980392156862742" blue="0.71372549019607845" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="bottom" secondItem="jmf-pK-bCv" secondAttribute="bottom" constant="10" id="AuO-qr-eeb"/>
+                                    <constraint firstItem="jmf-pK-bCv" firstAttribute="leading" secondItem="nAr-d6-js5" secondAttribute="leading" constant="8" id="Whn-JU-txm"/>
+                                    <constraint firstAttribute="height" constant="50" id="Xn7-eR-Lyn"/>
+                                </constraints>
                             </view>
                         </subviews>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
-                            <constraint firstItem="CwX-4S-vfG" firstAttribute="trailing" secondItem="6Tk-OE-BBY" secondAttribute="trailing" id="BQc-1g-xL0"/>
-                            <constraint firstItem="CwX-4S-vfG" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="CPe-H6-Qvw"/>
-                            <constraint firstItem="CwX-4S-vfG" firstAttribute="bottom" secondItem="6Tk-OE-BBY" secondAttribute="bottom" id="hVx-fa-dAv"/>
-                            <constraint firstItem="CwX-4S-vfG" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" id="pPv-Xu-XtX"/>
+                            <constraint firstItem="CwX-4S-vfG" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" id="GTJ-eB-D5f"/>
+                            <constraint firstItem="nAr-d6-js5" firstAttribute="trailing" secondItem="6Tk-OE-BBY" secondAttribute="trailing" id="J3G-LF-bMB"/>
+                            <constraint firstItem="CwX-4S-vfG" firstAttribute="trailing" secondItem="6Tk-OE-BBY" secondAttribute="trailing" id="KuU-Cp-w8C"/>
+                            <constraint firstItem="nAr-d6-js5" firstAttribute="top" secondItem="CwX-4S-vfG" secondAttribute="bottom" id="UVJ-kr-gIi"/>
+                            <constraint firstItem="nAr-d6-js5" firstAttribute="bottom" secondItem="6Tk-OE-BBY" secondAttribute="bottom" id="lFe-Bs-je3"/>
+                            <constraint firstItem="nAr-d6-js5" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="wdp-Il-pXS"/>
+                            <constraint firstItem="CwX-4S-vfG" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="yh7-xg-VBu"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                     </view>
@@ -39,6 +60,59 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="117.59999999999999" y="117.39130434782609"/>
+        </scene>
+        <!--Confirm View Controller-->
+        <scene sceneID="XlT-ob-Ibg">
+            <objects>
+                <viewController id="USt-HQ-rbM" customClass="ConfirmViewController" customModule="_20171218_JSContext" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="H4p-yr-70Z">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="uUo-rX-lxb" userLabel="Bottom View">
+                                <rect key="frame" x="0.0" y="20" width="375" height="50"/>
+                                <subviews>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="j7w-hw-4iI">
+                                        <rect key="frame" x="8" y="10" width="34" height="30"/>
+                                        <state key="normal" title="Back"/>
+                                        <connections>
+                                            <segue destination="m26-K6-OgF" kind="unwind" identifier="unwindSegueFromRight" customClass="UnwindSegueFromRight" customModule="_20171218_JSContext" customModuleProvider="target" unwindAction="returnFromSegueActionsWithSegue:" id="Y7W-am-G4K"/>
+                                        </connections>
+                                    </button>
+                                </subviews>
+                                <color key="backgroundColor" red="0.51764705879999995" green="0.50980392159999999" blue="0.71372549019999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="50" id="9jO-GZ-iMV"/>
+                                    <constraint firstItem="j7w-hw-4iI" firstAttribute="top" secondItem="uUo-rX-lxb" secondAttribute="top" constant="10" id="rya-IR-dbW"/>
+                                    <constraint firstItem="j7w-hw-4iI" firstAttribute="leading" secondItem="uUo-rX-lxb" secondAttribute="leading" constant="8" id="yNt-Mt-ef1"/>
+                                </constraints>
+                            </view>
+                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" pagingEnabled="YES" showsHorizontalScrollIndicator="NO" translatesAutoresizingMaskIntoConstraints="NO" id="GMh-i3-I0g">
+                                <rect key="frame" x="0.0" y="70" width="375" height="375"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="375" id="5Qw-X2-a2F"/>
+                                </constraints>
+                            </scrollView>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstItem="uUo-rX-lxb" firstAttribute="leading" secondItem="qWo-0X-c05" secondAttribute="leading" id="1aE-95-LyA"/>
+                            <constraint firstItem="GMh-i3-I0g" firstAttribute="leading" secondItem="qWo-0X-c05" secondAttribute="leading" id="6S5-wj-xP3"/>
+                            <constraint firstItem="GMh-i3-I0g" firstAttribute="trailing" secondItem="qWo-0X-c05" secondAttribute="trailing" id="H3d-Mo-Xp6"/>
+                            <constraint firstItem="GMh-i3-I0g" firstAttribute="top" secondItem="uUo-rX-lxb" secondAttribute="bottom" id="N3U-1v-pfo"/>
+                            <constraint firstItem="uUo-rX-lxb" firstAttribute="top" secondItem="qWo-0X-c05" secondAttribute="top" id="YYf-xo-sE9"/>
+                            <constraint firstItem="uUo-rX-lxb" firstAttribute="trailing" secondItem="qWo-0X-c05" secondAttribute="trailing" id="yMU-8V-Rjm"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="qWo-0X-c05"/>
+                    </view>
+                    <connections>
+                        <outlet property="scrollView" destination="GMh-i3-I0g" id="qhO-p6-SlI"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="0fE-aU-zZE" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <exit id="m26-K6-OgF" userLabel="Exit" sceneMemberID="exit"/>
+            </objects>
+            <point key="canvasLocation" x="997.60000000000002" y="116.49175412293854"/>
         </scene>
     </scenes>
 </document>
