@@ -33,8 +33,11 @@ class ViewController: UIViewController, WKUIDelegate ,WKNavigationDelegate, WKSc
         
         self.setWebView()
         self.setPreviewBtn()
-        // self.setKeyboardInputAccessoryView()
-        // self.setKeyboardObservers()
+        
+        self.setResignKeyboardBtn()
+        
+        self.setKeyboardInputAccessoryView()
+        self.setKeyboardObservers()
     }
     
     func setWebView() {
@@ -93,10 +96,15 @@ class ViewController: UIViewController, WKUIDelegate ,WKNavigationDelegate, WKSc
     
     @objc func keyboardWillShow(_ sender: Notification) {
         print("keyboardWillShow")
+        
+        wkWebView?.getCustomInputAccessoryView()?.isHidden = false
     }
     
     @objc func keyboardWillHide(_ sender: Notification) {
         print("keyboardWillHide")
+        print("wkWebView?.getCustomInputAccessoryView() : \(wkWebView?.getCustomInputAccessoryView())")
+        
+        wkWebView?.getCustomInputAccessoryView()?.isHidden = true
     }
     
     func setPreviewBtn() {
@@ -116,6 +124,24 @@ class ViewController: UIViewController, WKUIDelegate ,WKNavigationDelegate, WKSc
         self.startCaptureWebView(wkWebView: wkWebView!)
     }
     
+    func setResignKeyboardBtn() {
+        let btnFrame = CGRect(x: 200, y: 200, width: 100, height: 50)
+        
+        let btn = UIButton(frame: btnFrame)
+        btn.setTitle("resign keyboard", for: UIControlState.normal)
+        btn.setTitleColor(UIColor.red, for: UIControlState.normal)
+        
+        self.view.addSubview(btn)
+        
+        btn.addTarget(self, action: #selector(self.tappedResignKeyboardBtn(_:)), for: UIControlEvents.touchUpInside)
+    }
+    
+    @objc func tappedResignKeyboardBtn(_ sender: AnyObject) {
+        print("resign keyboard")
+        
+        wkWebView?.endEditing(true)
+    }
+    
     var wkWebViewFrame: CGRect = CGRect(x: 0, y: 0, width: 0, height: 0)
     var wkWebViewScrollContentOffset: CGPoint = CGPoint(x: 0, y: 0)
     var captureCount: UInt = 0
@@ -133,7 +159,11 @@ class ViewController: UIViewController, WKUIDelegate ,WKNavigationDelegate, WKSc
         // TODO: test instagram image size
         let scrollContentSize: CGSize = wkWebView.scrollView.contentSize
         
-        let expectedHeightByRatio: CGFloat = (const.SIZE_INSTAGRAM.height / const.SIZE_INSTAGRAM.width) * scrollContentSize.width
+        // let expectedHeightByRatio: CGFloat = (const.SIZE_INSTAGRAM.height / const.SIZE_INSTAGRAM.width) * scrollContentSize.width
+        
+        // let expectedHeightByRatio: CGFloat = (const.SIZE_FACEBOOK.height / const.SIZE_FACEBOOK.width) * scrollContentSize.width
+        let expectedHeightByRatio: CGFloat = (const.SIZE_TWITTER.height / const.SIZE_TWITTER.width) * scrollContentSize.width
+        
         let contentSize: CGSize = CGSize(width: scrollContentSize.width, height: expectedHeightByRatio)
         let imageNum: UInt = UInt((scrollContentSize.height / contentSize.height).rounded(FloatingPointRoundingRule.up))
         
